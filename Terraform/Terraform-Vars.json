@@ -1,0 +1,7 @@
+{
+    "credentials": "../../gcloudkey/gcloud_key.json",
+    "project": "nomad-terraform",
+    "region": "us-central1",
+    "software_repo": "../../Software_Repo",
+    "boot_scripts": "/ChefServer"
+}
