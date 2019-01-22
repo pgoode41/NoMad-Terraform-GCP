@@ -8,11 +8,13 @@ resource "google_compute_instance" "chef_instance" {
       image = "ubuntu-1804-chefserver"
     }
   }
+
   allow_stopping_for_update = true
-  
+
     metadata {
       exampleMeta = "This is example metadata"
     }
+    
   network_interface {
     # A default network is created for all GCP projects
     network       = "default"
