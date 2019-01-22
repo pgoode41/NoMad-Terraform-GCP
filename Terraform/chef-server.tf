@@ -1,6 +1,6 @@
 resource "google_compute_instance" "chef_instance" {
   name         = "chef-server"
-  machine_type = "f1-micro"
+  machine_type = "g1-small"
   zone = "us-central1-a"
 
   boot_disk {
@@ -8,7 +8,8 @@ resource "google_compute_instance" "chef_instance" {
       image = "ubuntu-1804-chefserver"
     }
   }
-
+  allow_stopping_for_update = true
+  
     metadata {
       exampleMeta = "This is example metadata"
     }

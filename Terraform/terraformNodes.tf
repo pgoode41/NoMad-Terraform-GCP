@@ -1,6 +1,6 @@
 resource "google_compute_instance" "terraform-nodes" {
   name = "terraform-node"
-  machine_type = "f1-micro"
+  machine_type = "g1-small"
   zone = "us-central1-a"
   count = 2
   boot_disk {
@@ -8,7 +8,8 @@ resource "google_compute_instance" "terraform-nodes" {
       image = "ubuntu-1804-bionic-v20181222"
     }
   }
-
+    allow_stopping_for_update = true
+    
     metadata {
       exampleMeta = "This is example metadata"
     }
