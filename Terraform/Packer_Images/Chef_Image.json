@@ -1,0 +1,36 @@
+{
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "../../SoftWare_Repo/chef-server-core_12.18.14-1_amd64.deb",
+            "destination": "/tmp/chef-server-core_12.18.14-1_amd64.deb"
+        },
+        {
+            "type": "file",
+            "source": "./BootScripts/ChefServer/Chef-Server_Boot.sh",
+            "destination": "/tmp/Chef-Server_Boot.sh"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo mkdir /Chef",
+                "sudo mv /tmp/Chef-Server_Boot.sh /Chef",
+                "sudo mv /tmp/chef-server-core_12.18.14-1_amd64.deb /Chef",
+                "sudo chmod +x /Chef/Chef-Server_Boot.sh",
+                "sudo /Chef/Chef-Server_Boot.sh"
+            ]              
+        }
+      ],
+
+    "builders": [
+        {
+            "type": "googlecompute",
+            "account_file": "{{user `credentials`}}",
+            "project_id": "{{user `project`}}",
+            "source_image": "ubuntu-1804-bionic-v20181222",
+            "ssh_username": "packer",
+            "zone": "us-central1-a",
+            "image_name": "ubuntu-1804-chefserver"
+        }
+    ]
+}

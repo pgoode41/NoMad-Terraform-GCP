@@ -20,6 +20,18 @@ resource "google_compute_instance" "nomad-server-nodes" {
     access_config = {
     }
   }
+    provisioner "chef" {
+    environment     = "_default"
+    run_list        = ["cookbook::recipe"]
+    node_name       = "nomad-server-node"
+    secret_key      = "${file("../../ChefKeys/stratushook.pem")}"
+    server_url      = "http://chef-server.stratushook.io/organizations/stratushook"
+    recreate_client = true
+    user_name       = "chefadmin"
+    user_key        = "souse.assonant.vest.urolog"
+    version         = "12.18.14"
+    ssl_verify_mode = ":verify_none"
+  }
 }
 
 
@@ -31,3 +43,4 @@ resource "google_dns_record_set" "nomad-server-node-dns" {
 
   rrdatas = ["${google_compute_instance.nomad-server-nodes.network_interface.0.access_config.0.nat_ip}"]
 }
+
