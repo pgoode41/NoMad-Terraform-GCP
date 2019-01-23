@@ -8,7 +8,10 @@
 
         {
             "type": "shell",
-            "inline": ["sudo mv /tmp/nomad /usr/local/bin"]              
+            "inline": [
+                "sudo mv /tmp/nomad /usr/local/bin",
+                "sudo mkdir /Nomad/Server-Data"
+            ]              
         }
       ],
 
